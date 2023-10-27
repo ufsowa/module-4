@@ -1,19 +1,21 @@
+document.getElementById('btn-rock').addEventListener('click', function() {playGame(1)});
+document.getElementById('btn-paper').addEventListener('click', function() {playGame(2)});
+document.getElementById('btn-scissors').addEventListener('click', function() {playGame(3)});
+  
+/* Functions */
+function playGame(playerInput){
+    let computerMove = 'nieznany ruch';
+    let playerMove = 'nieznany ruch';
+    clearMessages();
 
-let computerMove = 'nieznany ruch';
-let playerMove = 'nieznany ruch';
+    computerMove = getMoveName(Math.floor(Math.random()*3+1));
+    playerMove = getMoveName(playerInput);
 
-computerMove = getMoveName(Math.floor(Math.random()*3+1));
-playerMove = getMoveName(prompt('Wybierz swój ruch! 1: kamień, 2: papier, 3: nożyce.'));
+    console.log('moves:', computerMove, playerMove);
 
-console.log('moves:', computerMove, playerMove);
-
-if (playerMove != 'nieznany ruch') {
     displayResults(computerMove, playerMove);
-} else {
-    printMessage("Spróbuj jeszcze raz!");
 }
 
-/* Functions */
 function getMoveName(argMoveId) {
     if (argMoveId == 1) return 'kamień';
     if (argMoveId == 2) return 'papier';
