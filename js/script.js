@@ -1,15 +1,39 @@
-document.getElementById('btn-rock').addEventListener('click', function() {playGame(1)});
-document.getElementById('btn-paper').addEventListener('click', function() {playGame(2)});
-document.getElementById('btn-scissors').addEventListener('click', function() {playGame(3)});
-  
-/* Functions */
-function playGame(playerInput){
-    let computerMove = 'nieznany ruch';
-    let playerMove = 'nieznany ruch';
-    clearMessages();
+let computerCounter = 0;
+let playerCounter = 0;
+document.getElementById('btn-reset').addEventListener('click', function(event) {resetGame()});
+document.getElementById('btn-test').addEventListener('click', function(event) {testResults()});
 
-    computerMove = getMoveName(Math.floor(Math.random()*3+1));
-    playerMove = getMoveName(playerInput);
+document.getElementById('btn-rock').addEventListener('click', function(event) {playGame(1); event.stopPropagation()});
+document.getElementById('btn-paper').addEventListener('click', function(event) {playGame(2); event.stopPropagation()});
+document.getElementById('btn-scissors').addEventListener('click', function(event) {playGame(3); event.stopPropagation()});
+document.body.addEventListener('click', function() {clearMessages()});
+
+
+/* Functions */
+function testResults(trialsNumber = 10) {
+    while (trialsNumber > 0) {
+        playGame(3);
+        trialsNumber--;
+    }
+}
+
+function resetGame() {
+    clearResults();
+    computerCounter = 0;
+    playerCounter = 0;
+}
+
+function playGame(playerInput){
+    let computerMove = getMoveName(Math.floor(Math.random()*3+1));
+    let playerMove = getMoveName(playerInput);
+
+    clearMessages();
+    
+    if (!isPlayerWiner(computerMove, playerMove)){
+        if (Math.random() < 0.75){
+            computerMove = getMoveName(Math.floor(Math.random()*3+1));
+        }
+    }
 
     console.log('moves:', computerMove, playerMove);
 
@@ -35,11 +59,19 @@ function displayResults(argComputerMove, argPlayerMove) {
 
     if (argPlayerMove == argComputerMove) {
         printMessage('Remis!');
-    } else if( argComputerMove == 'kamień' && argPlayerMove == 'papier' ||
-        argComputerMove == 'papier' && argPlayerMove == 'nożyce' ||
-        argComputerMove == 'nożyce' && argPlayerMove == 'kamień' ){
-        printMessage('Ty wygrywasz!');
+    } else if(isPlayerWiner(argComputerMove, argPlayerMove)){
+        printMessage('Ty wygrywasz!', ['result','success']);
+        playerCounter++;
     } else {
-        printMessage('Tym razem przegrywasz :(');
+        printMessage('Tym razem przegrywasz :(', ['result','failure']);
+        computerCounter++;
     }
+
+    printResult(computerCounter, playerCounter);
+}
+
+function isPlayerWiner(argComputerMove, argPlayerMove){
+    return argComputerMove == 'kamień' && argPlayerMove == 'papier' ||
+    argComputerMove == 'papier' && argPlayerMove == 'nożyce' ||
+    argComputerMove == 'nożyce' && argPlayerMove == 'kamień';
 }

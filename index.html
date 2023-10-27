@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Kamień, papier, nożyce</title>
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<header>
+		<h1>Rock Paper Scissors</h1>
+	</header>
+	<div class="splash">
+		<p>A classic two-person game. Players start each round by choosing,<br>
+			“rock, paper or scissors!” On “shoot,” each player holds out their fist for rock,<br>
+			flat hand for paper, or their index and middle finger for scissors.<br>
+			Rock crushes scissors, scissors cut paper, and paper covers rock.<br>
+			See who wins each round!</p>
+		<h2>This is a good way to decide who goes first in many other disciplines.</h2>
+	</div>
 	<div class="container">
+		<div class="controls">
+			<button id="btn-reset" type="button">Reset the game!</button>
+			<button id="btn-test" type="button">Test your win chances!</button>
+			<div id="result"></div>
+		</div>
 		<div id="buttons">
 			<button id="btn-rock" type="button">Rock</button>
 			<button id="btn-paper" type="button">Paper</button>
