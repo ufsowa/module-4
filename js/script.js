@@ -31,11 +31,11 @@ function displayResults(argComputerMove, argPlayerMove) {
     printMessage('Zagrałem ' + argComputerMove
     + '! Twój ruch to ' + argPlayerMove + '!');
 
-    if( argComputerMove == 'kamień' && argPlayerMove == 'papier'){
-        printMessage('Ty wygrywasz!');
-    } else if( argComputerMove == 'papier' && argPlayerMove == 'nożyce'){
-        printMessage('Ty wygrywasz!');
-    } else if( argComputerMove == 'nożyce' && argPlayerMove == 'kamień'){
+    if (argPlayerMove == argComputerMove) {
+        printMessage('Remis!');
+    } else if( argComputerMove == 'kamień' && argPlayerMove == 'papier' ||
+        argComputerMove == 'papier' && argPlayerMove == 'nożyce' ||
+        argComputerMove == 'nożyce' && argPlayerMove == 'kamień' ){
         printMessage('Ty wygrywasz!');
     } else {
         printMessage('Tym razem przegrywasz :(');
